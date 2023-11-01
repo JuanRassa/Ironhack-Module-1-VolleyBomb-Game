@@ -1,0 +1,33 @@
+header#score-section {
+  color: #fff;
+
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #00000080;
+  margin-bottom: 30px;
+}
+.score-display {
+  display: flex;
+  gap: 15px;
+}
+.score-circle {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+.empty-score {
+  border: 1px solid white;
+  background-color: transparent;
+}
+.scored-score {
+  background-color: #fff;
+}
+
+#score-player-1 {
+}
+#score-player-2 {
+}
+#timer-bomb span {
+  font-size: 2.5rem;
+}

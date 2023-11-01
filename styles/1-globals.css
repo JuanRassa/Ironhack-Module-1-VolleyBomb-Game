@@ -1,0 +1,26 @@
+body {
+  padding: 20px 0;
+  /* background-image: url(/assets//background-xmas-pixelart.png); */
+  background-image: url(/assets/background-xmas.png);
+  /* background-position: center; */
+  background-size: cover;
+  /* overflow: hidden; */
+  font-family: 'DotGothic16', sans-serif;
+}
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 90vw;
+  margin: 0 auto;
+}
+.center-main-sections {
+  max-width: 75rem; /*  = 1200px  */
+  margin: 0 auto;
+  /* border: 1px solid red; */
+  background-color: #00000080;
+  color: #fff;
+}
+.flex-main-sections {
+  display: flex;
+}

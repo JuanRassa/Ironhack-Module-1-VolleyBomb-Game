@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VolleyBomb</title>
-  </head>
 
-  <body>
-    <!-- Homepage -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/0-reset.css">
+  <link rel="stylesheet" href="styles/1-globals.css">
+  <link rel="stylesheet" href="styles/2-header.css">
+  <link rel="stylesheet" href="styles/3-welcome-screen.css">
+  <link rel="stylesheet" href="styles/4-game-screen.css">
+  <link rel="stylesheet" href="styles/5-end-game-screen.css">
+
+  <title>VolleyBomb</title>
+</head>
+
+<body>
+  <!-- Homepage -->
+  <header id="score-section" class="center-main-sections flex-main-sections">
+    <div id="score-player-1" class="score-display">
+      <span class="score-circle scored-score"></span>
+      <span class="score-circle empty-score"></span>
+      <span class="score-circle empty-score"></span>
+      <span class="score-circle empty-score"></span>
+      <span class="score-circle empty-score"></span>
+    </div>
+    <div id="timer-bomb">
+      <span>60s</span>
+    </div>
+    <div id="score-player-2" class="score-display">
+      <span class="score-circle empty-score"></span>
+      <span class="score-circle empty-score"></span>
+      <span class="score-circle empty-score"></span>
+      <span class="score-circle empty-score"></span>
+      <span class="score-circle empty-score"></span>
+    </div>
+  </header>
+  <section id="welcome-screen" class="center-main-sections flex-main-sections">
     <h1>VolleyBomb</h1>
     <p>It's a 2 player volleyball game.</p>
     <p>Player 1 is on the left and Player 2 is on the right.</p>
@@ -21,5 +53,11 @@
       <li>Player 2 controls: Up, Down, Left, Right</li>
     </ul>
     <button>Start Game</button>
-  </body>
+
+  </section>
+  <section id="game-screen" class="center-main-sections flex-main-sections"></section>
+  <section id="end-game-screen" class="center-main-sections flex-main-sections"></section>
+
+</body>
+
 </html>
