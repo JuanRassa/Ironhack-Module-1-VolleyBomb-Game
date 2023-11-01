@@ -1,2 +1,38 @@
 #welcome-screen {
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-title {
+  justify-content: center;
+  padding-bottom: 15px;
+  font-size: 42px;
+}
+
+.game-rules {
+  padding-top: 50px;
+}
+
+.game-rules > p {
+  padding-bottom: 8px;
+  text-align: justify;
+  font-size: 18px;
+}
+
+.game-controls {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.game-controls > ul > li {
+  padding-top: 8px;
+}
+
+.start-button {
+  padding: 15px 25px;
+  border-radius: 8px;
+  color: white;
+  background-color: #e51f1f;
+  text-transform: uppercase;
+  /* font-family: 'DotGothic16', sans-serif; */
 }
