@@ -1,0 +1,32 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px 0;
+  background-image: url(/assets//background-xmas-pixelart.png);
+  /* background-image: url(/assets/background-xmas.png); */
+  /* background-position: center; */
+  background-size: cover;
+  /* overflow: hidden; */
+  font-family: 'DotGothic16', sans-serif;
+  transition: all 1s ease-in-out 0.2s;
+}
+.body-welcome-state {
+  backdrop-filter: blur(10px) grayscale(100%);
+}
+.body-game-state {
+  backdrop-filter: blur(10px) grayscale(100%);
+}
+.center-main-sections {
+  max-width: 75rem; /*  = 1200px  */
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+}
+.flex-main-sections {
+  display: flex;
+}
+.display-none {
+  display: none;
+}
