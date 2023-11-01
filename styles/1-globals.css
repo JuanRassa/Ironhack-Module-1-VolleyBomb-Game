@@ -30,3 +30,6 @@ body {
 .display-none {
   display: none;
 }
+.opacity-out {
+  opacity: 0;
+}
