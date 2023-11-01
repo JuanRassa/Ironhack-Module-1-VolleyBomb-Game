@@ -18,7 +18,7 @@
   <title>VolleyBomb</title>
 </head>
 
-<body>
+<body class="body-welcome-state">
   <!-- Homepage -->
   <header id="score-section" class="center-main-sections flex-main-sections">
     <div id="score-player-1" class="score-display">
@@ -55,9 +55,12 @@
     <button>Start Game</button>
 
   </section>
-  <section id="game-screen" class="center-main-sections flex-main-sections"></section>
+  <section id="game-screen" class="center-main-sections flex-main-sections">
+    <canvas id="game-canvas"></canvas>
+  </section>
   <section id="end-game-screen" class="center-main-sections flex-main-sections"></section>
 
+  <script src="/src/canvasTest.js"></script>
 </body>
 
 </html>
