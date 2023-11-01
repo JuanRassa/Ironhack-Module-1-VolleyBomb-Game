@@ -1,10 +1,7 @@
 header#score-section {
-  color: #fff;
-
   justify-content: space-between;
   align-items: center;
 
-  background-color: #00000080;
   margin-bottom: 30px;
 }
 .score-display {
@@ -15,12 +12,12 @@ header#score-section {
   border-radius: 50%;
   width: 20px;
   height: 20px;
-}
-.empty-score {
   border: 1px solid white;
+}
+.inactive-score {
   background-color: transparent;
 }
-.scored-score {
+.active-score {
   background-color: #fff;
 }
 
