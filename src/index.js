@@ -1,12 +1,8 @@
-const body = document.querySelector('body');
-const welcomeScreen = document.querySelector('#welcome-screen');
-const gameScreen = document.querySelector('#game-screen');
-const startButton = document.querySelector('.start-button');
+window.onload = function () {
+  const startButton = document.querySelector('.start-button');
+  const game = new Game();
 
-startButton.addEventListener('click', function () {
-  console.log('it worked');
-  gameScreen.classList.remove('display-none');
-  gameScreen.classList.toggle('opacity-out');
-  welcomeScreen.classList.toggle('display-none');
-  body.classList.remove('body-welcome-state');
-});
+  startButton.addEventListener('click', () => {
+    game.start();
+  });
+};
