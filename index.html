@@ -41,7 +41,6 @@
       <span class="score-circle inactive-score"></span>
     </div>
   </header>
-
   <section id="welcome-screen" class="center-main-sections flex-main-sections">
     <h1 class="game-title">VolleyBomb</h1>
     <div class="game-rules">
@@ -69,10 +68,18 @@
       <!-- <div class="ball"></div> -->
     </div>
   </section>
-  <section id="end-game-screen" class="center-main-sections flex-main-sections"></section>
+  <section id="end-game-screen" class="center-main-sections flex-main-sections">
+    <h2 id="game-result">Player X wins!!</h2>
+    <div id="final-score">
+      <p>Player 1 Score:</p>
+      <p>Player 2 Score:</p>
+    </div>
+    <button id="restart-button">Play Again</button>
+  </section>
+
+  <!-- <script src="/src/canvasTest.js"></script> -->
+  <script src="/src/Game.js"></script>
+  <script src="/src/index.js" type="module"></script>
 </body>
-<!-- <script src="/src/canvasTest.js"></script> -->
-<script src="/src/Game.js"></script>
-<script src="/src/index.js" type="module"></script>
 
 </html>

@@ -1,2 +1,28 @@
 #end-game-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#game-result {
+  font-size: 42px;
+  padding-bottom: 50px;
+  padding-top: 200px;
+}
+
+#final-score > p {
+  padding: 5px;
+  font-size: 18px;
+}
+
+#final-score {
+  padding-bottom: 50px;
+}
+
+#restart-button {
+  padding: 15px 25px;
+  border-radius: 8px;
+  color: white;
+  background-color: #e51f1f;
+  text-transform: uppercase;
 }
