@@ -1,16 +1,5 @@
 class Ball {
-  constructor(
-    gameCanvas,
-    gameCanvasWidth,
-    gameCanvasHeight,
-    left,
-    top,
-    width,
-    height,
-    radius,
-    velocityX,
-    velocityY
-  ) {
+  constructor(gameCanvas, gameCanvasWidth, gameCanvasHeight, left, top, width, height, radius, velocityX, velocityY) {
     this.gameCanvas = gameCanvas;
     this.gameCanvasWidth = gameCanvasWidth;
     this.gameCanvasHeight = gameCanvasHeight;
@@ -19,12 +8,11 @@ class Ball {
     this.width = width;
     this.height = height;
     this.radius = width / 2;
-    this.directionX = 100;
-    this.directionY = 100;
-    this.velocityX = velocityX;
-    this.velocityY = velocityY;
+    this.velocityX = 15;
+    this.velocityY = 10;
     this.bounce = 0.7;
     this.gravity = -0;
+    this.xDirection = 'right';
     this.ball = document.createElement('div');
 
     this.addBall();
@@ -44,20 +32,16 @@ class Ball {
 
   moveBall() {
     console.log(this.left);
-    this.velocityX = 20;
-    this.velocityY = 5.0;
-    // this.top += this.velocityY;
-    this.left += this.velocityX;
-    this.velocityY -= this.gravity;
-
-    // this.directionX += this.velocityX;
-    // this.directionY -= this.gravity;
-    // this.gameCanvas();
-
+    // X-Axis movement direction control:
     if (this.left + this.width >= this.gameCanvasWidth) {
-      this.left -= this.velocityX;
+      this.xDirection = 'left';
     }
+    if (this.left <= 0) this.xDirection = 'right';
+    // Ternary operation that will define the direction of the x-axis:
+    this.left += this.xDirection === 'right' ? this.velocityX : -this.velocityX;
 
+    // this.top += this.velocityY;
+    this.velocityY -= this.gravity;
     // if (this.top + this.radius > this.gameCanvasHeight) {
     //   this.top = this.gameCanvasHeight - this.radius;
     //   //bounce the ball
