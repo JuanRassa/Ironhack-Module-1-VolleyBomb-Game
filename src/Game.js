@@ -15,7 +15,6 @@ class Game {
 
     this.playerOne = new Player(this.gameCanvas, width / 8, 120, 60, './assets/Player1.png', true);
     this.playerTwo = new Player(this.gameCanvas, width - width / 8 - 200, 120, 60, './assets/Player2.png', false);
-    // this.BallBomb = new BallBomb();
     // this.Net = new Net();
   }
 
