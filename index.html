@@ -1,73 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/0-reset.css" />
+    <link rel="stylesheet" href="styles/1-globals.css" />
+    <link rel="stylesheet" href="styles/2-header.css" />
+    <link rel="stylesheet" href="styles/3-welcome-screen.css" />
+    <link rel="stylesheet" href="styles/4-game-screen.css" />
+    <link rel="stylesheet" href="styles/5-end-game-screen.css" />
 
-  <link rel="stylesheet" href="styles/0-reset.css" />
-  <link rel="stylesheet" href="styles/1-globals.css" />
-  <link rel="stylesheet" href="styles/2-header.css" />
-  <link rel="stylesheet" href="styles/3-welcome-screen.css" />
-  <link rel="stylesheet" href="styles/4-game-screen.css" />
-  <link rel="stylesheet" href="styles/5-end-game-screen.css" />
+    <title>VolleyBomb</title>
+  </head>
 
-  <title>VolleyBomb</title>
-</head>
+  <body class="body-welcome-state">
+    <!-- Homepage -->
+    <header id="score-section" class="center-main-sections flex-main-sections">
+      <div id="score-player-1" class="score-display">
+        <span class="score-circle active-score"></span>
+        <span class="score-circle inactive-score"></span>
+        <span class="score-circle inactive-score"></span>
+        <span class="score-circle inactive-score"></span>
+        <span class="score-circle inactive-score"></span>
+      </div>
+      <div id="timer-bomb">
+        <span>60s</span>
+      </div>
+      <div id="score-player-2" class="score-display">
+        <span class="score-circle inactive-score"></span>
+        <span class="score-circle inactive-score"></span>
+        <span class="score-circle inactive-score"></span>
+        <span class="score-circle inactive-score"></span>
+        <span class="score-circle inactive-score"></span>
+      </div>
+    </header>
 
-<body class="body-welcome-state">
-  <!-- Homepage -->
-  <header id="score-section" class="center-main-sections flex-main-sections">
-    <div id="score-player-1" class="score-display">
-      <span class="score-circle active-score"></span>
-      <span class="score-circle inactive-score"></span>
-      <span class="score-circle inactive-score"></span>
-      <span class="score-circle inactive-score"></span>
-      <span class="score-circle inactive-score"></span>
-    </div>
-    <div id="timer-bomb">
-      <span>60s</span>
-    </div>
-    <div id="score-player-2" class="score-display">
-      <span class="score-circle inactive-score"></span>
-      <span class="score-circle inactive-score"></span>
-      <span class="score-circle inactive-score"></span>
-      <span class="score-circle inactive-score"></span>
-      <span class="score-circle inactive-score"></span>
-    </div>
-  </header>
+    <section
+      id="welcome-screen"
+      class="center-main-sections flex-main-sections"
+    >
+      <h1 class="game-title">VolleyBomb</h1>
+      <div class="game-rules">
+        <p>It's a 2 player Volleyball Game.</p>
+        <p>Player 1 is on the left and Player 2 is on the right.</p>
+        <p>
+          If the ball touches the ground on your side, the opponent scores a
+          point.
+        </p>
+        <p>First to score 5 points wins!</p>
+      </div>
 
-  <section id="welcome-screen" class="center-main-sections flex-main-sections">
-    <h1 class="game-title">VolleyBomb</h1>
-    <div class="game-rules">
-      <p>It's a 2 player Volleyball Game.</p>
-      <p>Player 1 is on the left and Player 2 is on the right.</p>
-      <p>
-        If the ball touches the ground on your side, the opponent scores a
-        point.
-      </p>
-      <p>First to score 5 points wins!</p>
-    </div>
+      <div class="game-controls">
+        <ul>
+          <li>Player 1 controls: W, A, D</li>
+          <li>Player 2 controls: Up, Left, Right</li>
+        </ul>
+      </div>
 
-    <div class="game-controls">
-      <ul>
-        <li>Player 1 controls: W, A, D</li>
-        <li>Player 2 controls: Up, Left, Right</li>
-      </ul>
-    </div>
+      <button class="start-button">Start Game</button>
+    </section>
 
-    <button class="start-button">Start Game</button>
-  </section>
+    <section
+      id="game-screen"
+      class="center-main-sections flex-main-sections display-none opacity-out"
+    >
+      <canvas id="game-canvas"></canvas>
+    </section>
+    <section
+      id="end-game-screen"
+      class="center-main-sections flex-main-sections"
+    >
+      <h2 id="game-result">Player X wins!!</h2>
 
-  <section id="game-screen" class="center-main-sections flex-main-sections display-none opacity-out">
-    <canvas id="game-canvas"></canvas>
-  </section>
-  <section id="end-game-screen" class="center-main-sections flex-main-sections"></section>
-</body>
-<!-- <script src="/src/canvasTest.js"></script> -->
-<script src="/src/index.js"></script>
+      <div id="final-score">
+        <p>Player 1 Score:</p>
+        <p>Player 2 Score:</p>
+      </div>
+      <button id="restart-button">Play Again</button>
+    </section>
 
+    <!-- <script src="/src/canvasTest.js"></script> -->
+    <script src="/src/index.js"></script>
+  </body>
 </html>
