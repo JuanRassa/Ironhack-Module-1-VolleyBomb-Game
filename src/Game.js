@@ -6,6 +6,7 @@ class Game {
     this.gameScreen = document.getElementById('game-screen');
     this.gameCanvas = document.getElementById('game-canvas');
     this.endGameScreen = document.getElementById('end-game-screen');
+    this.ball = new Ball(this.gameCanvas, width, height, width / 8, 50, 44, 44);
 
     this.width = width;
     this.height = height;
@@ -15,7 +16,6 @@ class Game {
 
     // this.playerOne = new Player(this.gameScreen, 200, 500, 50, 80, './images/car.png');
     // this.playerTwo = new Player(this.gameScreen, 200, 500, 50, 80, './images/car.png');
-    // this.BallBomb = new BallBomb();
     // this.Net = new Net();
   }
 
@@ -47,7 +47,7 @@ class Game {
   }
 
   update() {
-    // this.player.move();
+    this.ball.moveBall();
 
     /*
     this.obstacles.forEach((obstacle, index) => {
@@ -82,7 +82,11 @@ class Game {
     //  - it touched the ground
     //  - which was the last player to touch the ball
 
-    const playerOneScoreDOM = document.getElementById('player-one-number-score');
-    const playerTwoScoreDOM = document.getElementById('player-two-number-score');
+    const playerOneScoreDOM = document.getElementById(
+      'player-one-number-score'
+    );
+    const playerTwoScoreDOM = document.getElementById(
+      'player-two-number-score'
+    );
   }
 }
