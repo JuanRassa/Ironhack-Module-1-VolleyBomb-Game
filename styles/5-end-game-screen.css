@@ -1,5 +1,6 @@
 #end-game-screen {
   display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 }

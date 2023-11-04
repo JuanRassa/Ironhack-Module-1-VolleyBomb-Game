@@ -6,7 +6,7 @@ body {
   /* background-image: url(/assets/background-xmas.png); */
   /* background-position: center; */
   background-size: cover;
-  /* overflow: hidden; */
+  overflow: hidden;
   font-family: 'DotGothic16', sans-serif;
   transition: all 1s ease-in-out 0.2s;
 }
