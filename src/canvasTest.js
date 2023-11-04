@@ -88,7 +88,12 @@ function ballMovement() {
   vy += gravity;
 
   //If either wall is hit, change direction on x axis
-  if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+  if (
+    ball.x + ball.radius >
+    canvas.width
+    // ||
+    // ball.x - ball.radius < 0
+  ) {
     vx *= -1;
   }
 

@@ -1,5 +1,5 @@
 class Game {
-  constructor(width = 1000, height = 500, velocityX, velocityY) {
+  constructor(width = 1000, height = 500, gravity) {
     // ATTRIBUTES
     this.body = document.querySelector('body');
     this.welcomeScreen = document.getElementById('welcome-screen');
@@ -9,12 +9,11 @@ class Game {
 
     this.width = width;
     this.height = height;
-    this.velocityX = velocityX;
-    this.velocityY = velocityY;
+    this.gravity = gravity;
     this.isGameOver = false;
 
-    // this.playerOne = new Player(this.gameScreen, 200, 500, 50, 80, './images/car.png');
-    // this.playerTwo = new Player(this.gameScreen, 200, 500, 50, 80, './images/car.png');
+    this.playerOne = new Player(this.gameCanvas, width / 8, 120, 60, './assets/Player1.png', true);
+    this.playerTwo = new Player(this.gameCanvas, width - width / 8 - 200, 120, 60, './assets/Player2.png', false);
     // this.BallBomb = new BallBomb();
     // this.Net = new Net();
   }
@@ -24,8 +23,8 @@ class Game {
     console.log('it worked');
 
     //  setting the game screen size
-    this.gameScreen.style.height = `${this.height}px`;
-    this.gameScreen.style.width = `${this.width}px`;
+    this.gameCanvas.style.width = `${this.width}px`;
+    this.gameCanvas.style.height = `${this.height}px`;
 
     this.gameScreen.classList.remove('display-none');
     this.gameScreen.classList.toggle('opacity-out');
@@ -47,7 +46,8 @@ class Game {
   }
 
   update() {
-    // this.player.move();
+    this.playerOne.move();
+    this.playerTwo.move();
 
     /*
     this.obstacles.forEach((obstacle, index) => {
