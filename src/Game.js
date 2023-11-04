@@ -6,6 +6,7 @@ class Game {
     this.gameScreen = document.getElementById('game-screen');
     this.gameCanvas = document.getElementById('game-canvas');
     this.endGameScreen = document.getElementById('end-game-screen');
+    this.ball = new Ball(this.gameCanvas, width, height, width / 8, 50, 44, 44);
 
     this.width = width;
     this.height = height;
@@ -48,6 +49,7 @@ class Game {
   update() {
     this.playerOne.move();
     this.playerTwo.move();
+    this.ball.moveBall();
 
     /*
     this.obstacles.forEach((obstacle, index) => {
