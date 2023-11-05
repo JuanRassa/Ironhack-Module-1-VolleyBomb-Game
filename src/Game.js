@@ -13,16 +13,13 @@ class Game {
     this.gravity = gravity;
     this.isGameOver = false;
 
+    this.net = new Net(this.gameCanvas, 10, 100, width / 2, 'black');
     this.playerOne = new Player(this.gameCanvas, width / 8, 120, 60, './assets/Player1.png', true);
     this.playerTwo = new Player(this.gameCanvas, width - width / 8 - 200, 120, 60, './assets/Player2.png', false);
-    // this.Net = new Net();
   }
 
   // METHODS
   start() {
-    console.log('it worked');
-
-    //  setting the game screen size
     this.gameCanvas.style.width = `${this.width}px`;
     this.gameCanvas.style.height = `${this.height}px`;
 

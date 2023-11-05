@@ -6,63 +6,68 @@ window.onload = function () {
     game.start();
   });
 
-  const keyDownHandle = e => {
-    // e.preventDefault();
-    console.log(e);
-    switch (e.code) {
-      case 'KeyW':
-        game.playerOne.directionY = 8;
-        break;
-      case 'KeyA':
-        game.playerOne.directionX = -8;
-        break;
-      case 'KeyD':
-        game.playerOne.directionX = 8;
-        break;
+  window.addEventListener('keydown', e => game.playerOne.movementController(e));
+  window.addEventListener('keyup', e => game.playerOne.movementController(e));
+  window.addEventListener('keydown', e => game.playerTwo.movementController(e));
+  window.addEventListener('keyup', e => game.playerTwo.movementController(e));
 
-      case 'ArrowUp':
-        game.playerTwo.directionY = 8;
-        break;
-      case 'ArrowLeft':
-        game.playerTwo.directionX = -8;
-        break;
-      case 'ArrowRight':
-        game.playerTwo.directionX = 8;
-        break;
+  // const keyDownHandle = e => {
+  //   // e.preventDefault();
+  //   console.log(e);
+  //   switch (e.code) {
+  //     case 'KeyW':
+  //       game.playerOne.directionY = 8;
+  //       break;
+  //     case 'KeyA':
+  //       game.playerOne.directionX = -8;
+  //       break;
+  //     case 'KeyD':
+  //       game.playerOne.directionX = 8;
+  //       break;
 
-      default:
-        break;
-    }
-  };
+  //     case 'ArrowUp':
+  //       game.playerTwo.directionY = 8;
+  //       break;
+  //     case 'ArrowLeft':
+  //       game.playerTwo.directionX = -8;
+  //       break;
+  //     case 'ArrowRight':
+  //       game.playerTwo.directionX = 8;
+  //       break;
 
-  window.addEventListener('keydown', keyDownHandle);
+  //     default:
+  //       break;
+  //   }
+  // };
 
-  window.addEventListener('keyup', e => {
-    // e.preventDefault();
-    console.log(e);
-    switch (e.code) {
-      case 'KeyW':
-        game.playerOne.directionY = game.playerOne.directionY;
-        break;
-      case 'KeyA':
-        game.playerOne.directionX = game.playerOne.directionX;
-        break;
-      case 'KeyD':
-        game.playerOne.directionX = game.playerOne.directionX;
-        break;
+  // window.addEventListener('keydown', keyDownHandle);
 
-      case 'ArrowUp':
-        game.playerTwo.directionY = -8;
-        break;
-      case 'ArrowLeft':
-        game.playerTwo.directionX = -8;
-        break;
-      case 'ArrowRight':
-        game.playerTwo.directionX = 8;
-        break;
+  // window.addEventListener('keyup', e => {
+  //   // e.preventDefault();
+  //   console.log(e);
+  //   switch (e.code) {
+  //     case 'KeyW':
+  //       game.playerOne.directionY = game.playerOne.directionY;
+  //       break;
+  //     case 'KeyA':
+  //       game.playerOne.directionX = game.playerOne.directionX;
+  //       break;
+  //     case 'KeyD':
+  //       game.playerOne.directionX = game.playerOne.directionX;
+  //       break;
 
-      default:
-        break;
-    }
-  });
+  //     case 'ArrowUp':
+  //       game.playerTwo.directionY = -8;
+  //       break;
+  //     case 'ArrowLeft':
+  //       game.playerTwo.directionX = -8;
+  //       break;
+  //     case 'ArrowRight':
+  //       game.playerTwo.directionX = 8;
+  //       break;
+
+  //     default:
+  //       break;
+  //   }
+  // });
 };
