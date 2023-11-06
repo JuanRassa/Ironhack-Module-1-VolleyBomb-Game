@@ -7,6 +7,7 @@ class Game {
     this.gameCanvas = document.getElementById('game-canvas');
     this.endGameScreen = document.getElementById('end-game-screen');
 
+    this.net = new Net(this.gameCanvas, 10, 100, width / 2, 'black');
     this.playerOne = new Player(this.gameCanvas, width / 8, 120, 60, './assets/Player1.png', true);
     this.playerTwo = new Player(this.gameCanvas, width - width / 8 - 200, 120, 60, './assets/Player2.png', false);
     this.ball = new Ball(this.gameCanvas, width, height, 800, 50, 44, 44, this.playerOne, this.playerTwo);
@@ -15,10 +16,6 @@ class Game {
     this.height = height;
     this.gravity = gravity;
     this.isGameOver = false;
-
-    this.net = new Net(this.gameCanvas, 10, 100, width / 2, 'black');
-    this.playerOne = new Player(this.gameCanvas, width / 8, 120, 60, './assets/Player1.png', true);
-    this.playerTwo = new Player(this.gameCanvas, width - width / 8 - 200, 120, 60, './assets/Player2.png', false);
   }
 
   // METHODS
