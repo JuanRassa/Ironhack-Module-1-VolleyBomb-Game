@@ -127,7 +127,7 @@ class Game {
         ballRect.top < playerTwoRect.bottom &&
         ballRect.bottom > playerTwoRect.top
       ) {
-        console.log('Collision with Player Two');
+        console.log('Collision with Player Two.');
         // To the Left
         if (ballRect.left + 20 > playerTwoRect.left && ballRect.left + 20 < playerTwoRect.left + 60) {
           this.ball.velocityX = -Math.abs(this.ball.velocityX);
