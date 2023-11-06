@@ -19,8 +19,8 @@ class Ball {
     this.width = width;
     this.height = height;
     this.radius = width / 2;
-    this.velocityX = 15;
-    this.velocityY = 10;
+    this.velocityX = 8;
+    this.velocityY = 8;
     this.bounce = 0.7;
     this.gravity = -0;
     this.xDirection = 'right';
@@ -46,23 +46,57 @@ class Ball {
     console.log(this.left);
     // X-Axis movement direction control:
     if (this.left + this.width >= this.gameCanvasWidth) {
-      this.xDirection = 'left';
+      this.velocityX = -this.velocityX; // Change the x direction
+      this.left = this.gameCanvasWidth - this.width; // Repositioning inside the canvas
     }
-    if (this.left <= 0) this.xDirection = 'right';
-    // Ternary operation that will define the direction of the x-axis:
-    this.left += this.xDirection === 'right' ? this.velocityX : -this.velocityX;
+    if (this.left <= 0) {
+      this.velocityX = -this.velocityX; // Change the x direction
+      this.left = 0; // Repositioning inside the canvas
+    }
 
-    this.velocityY -= this.gravity;
-
-    // Y-Axis movement direction control:
+    // Y-axis movement direction control
     if (this.top + this.height >= this.gameCanvasHeight) {
-      this.yDirection = 'top';
+      this.velocityY = -this.velocityY; // Change the y direction
+      this.top = this.gameCanvasHeight - this.height; // Repositioning inside the canvas
     }
-    if (this.top <= 0) this.yDirection = 'bottom';
-    this.top += this.yDirection === 'bottom' ? this.velocityY : -this.velocityY;
+    if (this.top <= 0) {
+      this.velocityY = -this.velocityY; // Change the y direction
+      this.top = 0; // Repositioning inside the canvas
+    }
+
+    // Update ball position
+    this.left += this.velocityX;
+    this.top += this.velocityY;
 
     this.updatedPosition();
   }
+  // console.log(this.left);
+  // // X-Axis movement direction control:
+  // if (this.left + this.width >= this.gameCanvasWidth) {
+  //   this.xDirection = 'left';
+  // }
+  // if (this.left <= 0) this.xDirection = 'right';
+  // // Ternary operation that will define the direction of the x-axis:
+  // this.left += this.xDirection === 'right' ? this.velocityX : -this.velocityX;
+
+  // this.velocityY -= this.gravity;
+
+  // // Y-Axis movement direction control:
+  // if (this.top + this.height >= this.gameCanvasHeight) {
+  //   this.yDirection = 'top';
+  // }
+  // if (this.top <= 0) this.yDirection = 'bottom';
+  // this.top += this.yDirection === 'bottom' ? this.velocityY : -this.velocityY;
+
+  // // put limits to the canvas border
+  // // if (this.left <= 0 || this.left + this.width >= this.gameCanvasWidth) {
+  // //   this.velocityX = -this.velocityX;
+  // // }
+  // // if (this.top <= 0 || this.top + this.height >= this.gameCanvasHeight) {
+  // //   this.velocityY = -this.velocityY;
+  // // }
+
+  // this.updatedPosition();
 
   updatedPosition() {
     this.ball.style.top = `${this.top}px`;
