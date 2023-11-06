@@ -15,6 +15,7 @@ class Player {
     this.right_dir = false;
     this.up_dir = false;
     this.jumping = true;
+    this.score = 0;
 
     this.addPlayer(imgSrc);
   }

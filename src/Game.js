@@ -1,5 +1,5 @@
 class Game {
-  constructor(width = 1000, height = 500, gravity) {
+  constructor(width = 1000, height = 500, maxScore = 5) {
     // ATTRIBUTES
     this.body = document.querySelector('body');
     this.welcomeScreen = document.getElementById('welcome-screen');
@@ -14,8 +14,11 @@ class Game {
 
     this.width = width;
     this.height = height;
-    this.gravity = gravity;
+
+    this.maxScore = maxScore;
     this.isGameOver = false;
+
+    this.isRoundOver = false;
   }
 
   // METHODS
@@ -36,8 +39,11 @@ class Game {
     if (this.isGameOver) {
       return;
     }
+    if (this.isRoundOver) {
+      return;
+    }
     this.update();
-    this.updateStats();
+    this.checkScore();
 
     window.requestAnimationFrame(() => this.gameLoop());
   }
@@ -47,26 +53,41 @@ class Game {
     this.playerTwo.move();
     this.ball.moveBall();
     this.detectCollision();
-
-    if (this.lives === 0) {
-      this.endGame();
-    }
   }
   endGame() {
-    // this.player.element.remove();
-    this.obstacles.forEach(obs => obs.element.remove());
+    console.log('GAME OVER');
     this.isGameOver = true;
 
     this.gameScreen.style.display = 'none';
     this.endGameScreen.style.display = 'block';
   }
-  updateStats() {
+  checkScore() {
     //  Call to the BallBomb() method that evaluates if:
     //  - it touched the ground
     //  - which was the last player to touch the ball
 
+    if (this.ball.didHitGround()) {
+      const ball = this.ball.ball;
+      const ballRect = ball.getBoundingClientRect();
+      if (ballRect.x > 0 && ballRect.x < this.width / 2) {
+        this.playerTwo.score++;
+      }
+      if (ballRect.x > this.width / 2 && ballRect.x < this.width) {
+        this.playerOne.score++;
+      }
+      this.isRoundOver = true;
+    }
+    if (this.playerOne.score === this.maxScore) {
+      this.endGame();
+    }
+    if (this.playerTwo.score === this.maxScore) {
+      this.endGame();
+    }
+
     const playerOneScoreDOM = document.getElementById('player-one-number-score');
+    playerOneScoreDOM.innerText = this.playerOne.score;
     const playerTwoScoreDOM = document.getElementById('player-two-number-score');
+    playerTwoScoreDOM.innerText = this.playerTwo.score;
   }
 
   detectCollision() {
@@ -87,13 +108,13 @@ class Game {
         ballRect.top < playerOneRect.bottom &&
         ballRect.bottom > playerOneRect.top
       ) {
-        console.log('*****');
-        console.log('Ball Left:', ballRect.left);
-        console.log('Ball Right:', ballRect.right);
-        console.log('-----');
-        console.log('Player Left:', playerOneRect.left);
-        console.log('Player Right:', playerOneRect.right);
-        console.log('*****');
+        console.log(this.playerOne.score);
+        // console.log('Ball Left:', ballRect.left);
+        // console.log('Ball Right:', ballRect.right);
+        // console.log('-----');
+        // console.log('Player Left:', playerOneRect.left);
+        // console.log('Player Right:', playerOneRect.right);
+        // console.log('*****');
 
         // To the Left
         if (ballRect.left + 20 > playerOneRect.left && ballRect.left + 20 < playerOneRect.left + 60) {

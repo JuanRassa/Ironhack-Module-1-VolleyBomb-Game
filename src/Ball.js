@@ -61,4 +61,11 @@ class Ball {
     this.ball.style.top = `${this.top}px`;
     this.ball.style.left = `${this.left}px`;
   }
+  didHitGround() {
+    if (this.top + this.height >= this.gameCanvasHeight) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
