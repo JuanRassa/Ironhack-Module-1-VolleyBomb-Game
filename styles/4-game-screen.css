@@ -29,3 +29,8 @@ section#game-screen {
   border: 1px solid blue;
   background-color: green;
 }
+
+#player-one,
+#player-two {
+  border: 1px solid black;
+}

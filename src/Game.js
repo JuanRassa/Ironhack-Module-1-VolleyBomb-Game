@@ -10,7 +10,7 @@ class Game {
     this.net = new Net(this.gameCanvas, 10, 100, width / 2, 'black');
     this.playerOne = new Player(this.gameCanvas, width / 8, 120, 60, './assets/Player1.png', true);
     this.playerTwo = new Player(this.gameCanvas, width - width / 8 - 200, 120, 60, './assets/Player2.png', false);
-    this.ball = new Ball(this.gameCanvas, width, height, 800, 50, 44, 44, this.playerOne, this.playerTwo);
+    this.ball = new Ball(this.gameCanvas, width, height, -30, 50, 44, 44, this.playerOne, this.playerTwo);
 
     this.width = width;
     this.height = height;
@@ -48,22 +48,6 @@ class Game {
     this.ball.moveBall();
     this.detectCollision();
 
-    /*
-    this.obstacles.forEach((obstacle, index) => {
-      obstacle.move();
-
-      if (this.player.didCollide(obstacle)) {
-        obstacle.element.remove();
-        this.obstacles.splice(index, 1);
-
-        this.lives--;
-      } else if (obstacle.top > this.height) {
-        obstacle.element.remove();
-        this.obstacles.splice(index, 1);
-        this.score++;
-      }
-    });
-    */
     if (this.lives === 0) {
       this.endGame();
     }
@@ -89,7 +73,7 @@ class Game {
     const playerOne = this.playerOne.playerElement;
     const playerTwo = this.playerTwo.playerElement;
     const ball = this.ball.ball;
-    console.log('kick the ball');
+    // console.log('kick the ball');
     const playerOneRect = playerOne.getBoundingClientRect();
     const playerTwoRect = playerTwo.getBoundingClientRect();
     const ballRect = ball.getBoundingClientRect();
@@ -103,10 +87,37 @@ class Game {
         ballRect.top < playerOneRect.bottom &&
         ballRect.bottom > playerOneRect.top
       ) {
-        // console.log('Collision with Player One');
-        if (this.ball.velocityX > 0) {
-          // console.log('Changing direction for Player One');
-          this.ball.velocityX = -this.ball.velocityX;
+        console.log('*****');
+        console.log('Ball Left:', ballRect.left);
+        console.log('Ball Right:', ballRect.right);
+        console.log('-----');
+        console.log('Player Left:', playerOneRect.left);
+        console.log('Player Right:', playerOneRect.right);
+        console.log('*****');
+
+        // To the Left
+        if (ballRect.left + 20 > playerOneRect.left && ballRect.left + 20 < playerOneRect.left + 60) {
+          this.ball.velocityX = -Math.abs(this.ball.velocityX);
+          // alert(`
+          //   LEFT! Ball X: ${ballRect.left + 20};
+          //   Player Left: ${playerOneRect.left}
+          //   Player Half: ${playerOneRect.left + 60}
+          //   VelocityX: ${this.ball.velocityX}
+          //   `);
+        }
+        // To the Right
+        if (ballRect.left + 20 > playerOneRect.left + 60 && ballRect.left + 20 < playerOneRect.right) {
+          this.ball.velocityX = Math.abs(this.ball.velocityX);
+          //   alert(`
+          //     RIGHT! Ball X: ${ballRect.left + 20};
+          //     Player Half: ${playerOneRect.left + 60}
+          //     Player Right: ${playerOneRect.right}
+          //     VelocityX: ${this.ball.velocityX}
+          // `);
+        }
+
+        if (this.ball.velocityY > 0) {
+          this.ball.velocityY = -this.ball.velocityY;
         }
       }
 
@@ -116,10 +127,29 @@ class Game {
         ballRect.top < playerTwoRect.bottom &&
         ballRect.bottom > playerTwoRect.top
       ) {
-        // console.log('Collision with Player Two');
-        if (this.ball.velocityX > 0) {
-          // console.log('Changing direction for Player Two');
-          this.ball.velocityX = -this.ball.velocityX;
+        console.log('Collision with Player Two');
+        // To the Left
+        if (ballRect.left + 20 > playerTwoRect.left && ballRect.left + 20 < playerTwoRect.left + 60) {
+          this.ball.velocityX = -Math.abs(this.ball.velocityX);
+          // alert(`
+          //   LEFT! Ball X: ${ballRect.left + 20};
+          //   Player Left: ${playerOneRect.left}
+          //   Player Half: ${playerOneRect.left + 60}
+          //   VelocityX: ${this.ball.velocityX}
+          //   `);
+        }
+        // To the Right
+        if (ballRect.left + 20 > playerTwoRect.left + 60 && ballRect.left + 20 < playerTwoRect.right) {
+          this.ball.velocityX = Math.abs(this.ball.velocityX);
+          //   alert(`
+          //     RIGHT! Ball X: ${ballRect.left + 20};
+          //     Player Half: ${playerOneRect.left + 60}
+          //     Player Right: ${playerOneRect.right}
+          //     VelocityX: ${this.ball.velocityX}
+          // `);
+        }
+        if (this.ball.velocityY > 0) {
+          this.ball.velocityY = -this.ball.velocityY;
         }
       }
     }
