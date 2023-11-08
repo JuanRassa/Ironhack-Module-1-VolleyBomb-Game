@@ -15,7 +15,6 @@ class Player {
     this.right_dir = false;
     this.up_dir = false;
     this.jumping = true;
-    this.score = 0;
 
     this.addPlayer(imgSrc);
   }
@@ -120,5 +119,12 @@ class Player {
   updatePosition() {
     this.playerElement.style.left = `${this.left}px`;
     this.playerElement.style.bottom = `${this.bottom}px`;
+  }
+
+  reposition(newLeft) {
+    if (this.ball.didHitGround()) {
+      this.left = newLeft;
+      this.bottom = 0; // Reset bottom position if needed
+    }
   }
 }

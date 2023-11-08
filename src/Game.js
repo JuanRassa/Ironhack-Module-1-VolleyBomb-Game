@@ -8,17 +8,44 @@ class Game {
     this.endGameScreen = document.getElementById('end-game-screen');
 
     this.net = new Net(this.gameCanvas, 10, 100, width / 2, 'black');
-    this.playerOne = new Player(this.gameCanvas, width / 8, 120, 60, './assets/Player1.png', true);
-    this.playerTwo = new Player(this.gameCanvas, width - width / 8 - 200, 120, 60, './assets/Player2.png', false);
-    this.ball = new Ball(this.gameCanvas, width, height, -30, 50, 44, 44, this.playerOne, this.playerTwo);
+    this.playerOne = new Player(
+      this.gameCanvas,
+      width / 8,
+      120,
+      60,
+      './assets/Player1.png',
+      true
+    );
+    this.playerTwo = new Player(
+      this.gameCanvas,
+      width - width / 8 - 200,
+      120,
+      60,
+      './assets/Player2.png',
+      false
+    );
+    this.ball = new Ball(
+      this.gameCanvas,
+      width,
+      height,
+      -30,
+      50,
+      44,
+      44,
+      this.playerOne,
+      this.playerTwo
+    );
 
     this.width = width;
     this.height = height;
 
     this.maxScore = maxScore;
+    this.playerOne.score = 0;
+    this.playerTwo.score = 0;
     this.isGameOver = false;
 
     this.isRoundOver = false;
+    this.round = new Round(this.isGameOver, this.timer);
   }
 
   // METHODS
@@ -69,6 +96,7 @@ class Game {
     if (this.ball.didHitGround()) {
       const ball = this.ball.ball;
       const ballRect = ball.getBoundingClientRect();
+
       if (ballRect.x > 0 && ballRect.x < this.width / 2) {
         this.playerTwo.score++;
       }
@@ -77,6 +105,7 @@ class Game {
       }
       this.isRoundOver = true;
     }
+
     if (this.playerOne.score === this.maxScore) {
       this.endGame();
     }
@@ -84,9 +113,13 @@ class Game {
       this.endGame();
     }
 
-    const playerOneScoreDOM = document.getElementById('player-one-number-score');
+    const playerOneScoreDOM = document.getElementById(
+      'player-one-number-score'
+    );
     playerOneScoreDOM.innerText = this.playerOne.score;
-    const playerTwoScoreDOM = document.getElementById('player-two-number-score');
+    const playerTwoScoreDOM = document.getElementById(
+      'player-two-number-score'
+    );
     playerTwoScoreDOM.innerText = this.playerTwo.score;
   }
 
@@ -117,7 +150,10 @@ class Game {
         // console.log('*****');
 
         // To the Left
-        if (ballRect.left + 20 > playerOneRect.left && ballRect.left + 20 < playerOneRect.left + 60) {
+        if (
+          ballRect.left + 20 > playerOneRect.left &&
+          ballRect.left + 20 < playerOneRect.left + 60
+        ) {
           this.ball.velocityX = -Math.abs(this.ball.velocityX);
           // alert(`
           //   LEFT! Ball X: ${ballRect.left + 20};
@@ -127,7 +163,10 @@ class Game {
           //   `);
         }
         // To the Right
-        if (ballRect.left + 20 > playerOneRect.left + 60 && ballRect.left + 20 < playerOneRect.right) {
+        if (
+          ballRect.left + 20 > playerOneRect.left + 60 &&
+          ballRect.left + 20 < playerOneRect.right
+        ) {
           this.ball.velocityX = Math.abs(this.ball.velocityX);
           //   alert(`
           //     RIGHT! Ball X: ${ballRect.left + 20};
@@ -150,7 +189,10 @@ class Game {
       ) {
         console.log('Collision with Player Two.');
         // To the Left
-        if (ballRect.left + 20 > playerTwoRect.left && ballRect.left + 20 < playerTwoRect.left + 60) {
+        if (
+          ballRect.left + 20 > playerTwoRect.left &&
+          ballRect.left + 20 < playerTwoRect.left + 60
+        ) {
           this.ball.velocityX = -Math.abs(this.ball.velocityX);
           // alert(`
           //   LEFT! Ball X: ${ballRect.left + 20};
@@ -160,7 +202,10 @@ class Game {
           //   `);
         }
         // To the Right
-        if (ballRect.left + 20 > playerTwoRect.left + 60 && ballRect.left + 20 < playerTwoRect.right) {
+        if (
+          ballRect.left + 20 > playerTwoRect.left + 60 &&
+          ballRect.left + 20 < playerTwoRect.right
+        ) {
           this.ball.velocityX = Math.abs(this.ball.velocityX);
           //   alert(`
           //     RIGHT! Ball X: ${ballRect.left + 20};
@@ -174,5 +219,11 @@ class Game {
         }
       }
     }
+  }
+
+  repositionScreen() {
+    this.playerOne.reposition(100);
+    this.playerTwo.reposition(800);
+    this.ball.reposition(400, 250);
   }
 }

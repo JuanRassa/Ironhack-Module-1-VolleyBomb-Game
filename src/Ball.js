@@ -1,5 +1,16 @@
 class Ball {
-  constructor(gameCanvas, gameCanvasWidth, gameCanvasHeight, left, top, width, height, radius, velocityX, velocityY) {
+  constructor(
+    gameCanvas,
+    gameCanvasWidth,
+    gameCanvasHeight,
+    left,
+    top,
+    width,
+    height,
+    radius,
+    velocityX,
+    velocityY
+  ) {
     this.gameCanvas = gameCanvas;
     this.gameCanvasWidth = gameCanvasWidth;
     this.gameCanvasHeight = gameCanvasHeight;
@@ -66,6 +77,12 @@ class Ball {
       return true;
     } else {
       return false;
+    }
+  }
+  reposition(newLeft, newBottom) {
+    if (this.didHitGround() === true) {
+      this.left = newLeft;
+      this.bottom = newBottom;
     }
   }
 }
