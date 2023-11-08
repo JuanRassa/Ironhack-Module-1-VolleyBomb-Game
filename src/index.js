@@ -4,10 +4,9 @@ window.onload = function () {
 
   startButton.addEventListener('click', () => {
     game.start();
+    window.addEventListener('keydown', e => game.playerOne.movementController(e));
+    window.addEventListener('keyup', e => game.playerOne.movementController(e));
+    window.addEventListener('keydown', e => game.playerTwo.movementController(e));
+    window.addEventListener('keyup', e => game.playerTwo.movementController(e));
   });
-
-  window.addEventListener('keydown', e => game.playerOne.movementController(e));
-  window.addEventListener('keyup', e => game.playerOne.movementController(e));
-  window.addEventListener('keydown', e => game.playerTwo.movementController(e));
-  window.addEventListener('keyup', e => game.playerTwo.movementController(e));
 };
