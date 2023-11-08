@@ -1,16 +1,18 @@
 class Game {
-  constructor(width = 1000, height = 500, maxScore = 5) {
+  constructor(canvasWidth = 1000, canvasHeight = 500, maxScore = 5) {
     // ATTRIBUTES
     this.body = document.querySelector('body');
     this.welcomeScreen = document.getElementById('welcome-screen');
     this.gameScreen = document.getElementById('game-screen');
     this.gameCanvas = document.getElementById('game-canvas');
     this.endGameScreen = document.getElementById('end-game-screen');
+    this.canvasWidth = canvasWidth;
+    this.canvasHeight = canvasHeight;
 
-    this.net = new Net(this.gameCanvas, 10, 100, width / 2, 'black');
+    this.net = new Net(this.gameCanvas, 10, 50, canvasWidth / 2, 'gold');
     this.playerOne = new Player(
       this.gameCanvas,
-      width / 8,
+      canvasWidth / 8,
       120,
       60,
       './assets/Player1.png',
@@ -18,7 +20,7 @@ class Game {
     );
     this.playerTwo = new Player(
       this.gameCanvas,
-      width - width / 8 - 200,
+      canvasWidth - canvasWidth / 8 - 200,
       120,
       60,
       './assets/Player2.png',
@@ -26,9 +28,9 @@ class Game {
     );
     this.ball = new Ball(
       this.gameCanvas,
-      width,
-      height,
-      -30,
+      canvasWidth,
+      canvasHeight,
+      this.canvasWidth / 8 + 38,
       50,
       44,
       44,
@@ -36,144 +38,194 @@ class Game {
       this.playerTwo
     );
 
-    this.width = width;
-    this.height = height;
-
+    this.p1Score = 0;
+    this.p2Score = 0;
     this.maxScore = maxScore;
-    this.playerOne.score = 0;
-    this.playerTwo.score = 0;
-    this.isGameOver = false;
+    this.winner = '';
+    this.p2WonRound = false;
 
     this.isRoundOver = false;
     this.round = new Round(this.isGameOver, this.timer);
-  }
 
+    this.roundDuration = 20; // Time of the round in seconds
+    this.timerElement = document.getElementById('timer-bomb');
+    this.timeLeft = this.roundDuration;
+    this.timerInterval = null;
+
+    this.gameResult = document.getElementById('game-result');
+    this.playerOneFinalScore = document.getElementById('player-one-finalscore');
+    this.playerTwoFinalScore = document.getElementById('player-two-finalscore');
+  }
+  d;
   // METHODS
   start() {
-    this.gameCanvas.style.width = `${this.width}px`;
-    this.gameCanvas.style.height = `${this.height}px`;
+    this.gameCanvas.style.width = `${this.canvasWidth}px`;
+    this.gameCanvas.style.height = `${this.canvasHeight}px`;
 
     this.gameScreen.classList.remove('display-none');
     this.gameScreen.classList.toggle('opacity-out');
     this.welcomeScreen.classList.toggle('display-none');
     this.body.classList.remove('body-welcome-state');
-
-    this.gameLoop();
+    this.startRoundTimer();
+    this.loop();
   }
 
-  gameLoop() {
-    // console.log('Inside the game loop...');
-    if (this.isGameOver) {
+  startRoundTimer() {
+    this.timeLeft = this.roundDuration;
+    this.timerInterval = setInterval(() => {
+      this.timeLeft--;
+      this.updateTimerDisplay();
+      if (this.timeLeft === 0) {
+        this.stopRoundTimer();
+        this.restartRound();
+      }
+    }, 1000);
+  }
+
+  stopRoundTimer() {
+    clearInterval(this.timerInterval);
+  }
+
+  updateTimerDisplay() {
+    this.timerElement.innerText = `${this.timeLeft}s`;
+  }
+
+  loop() {
+    if (this.isGameOver()) {
+      this.endGame();
+      this.stopRoundTimer();
       return;
     }
     if (this.isRoundOver) {
-      return;
+      return setTimeout(() => {
+        this.stopRoundTimer();
+        this.restartRound();
+      }, 1000);
     }
     this.update();
     this.checkScore();
 
-    window.requestAnimationFrame(() => this.gameLoop());
+    window.requestAnimationFrame(() => this.loop());
   }
 
+  restartRound() {
+    // Init State-Position of Ball
+    this.ball.velocityX = 0;
+    this.ball.velocityY = 8;
+    this.ball.top = 50;
+    if (this.p2WonRound) {
+      this.ball.left = this.canvasWidth - this.canvasWidth / 8 - 200 + 38;
+    } else {
+      this.ball.left = this.canvasWidth / 8 + 38;
+    }
+    // Init State-Position of P1
+    this.playerOne.left = this.canvasWidth / 8;
+    this.playerOne.x_velocity = 0;
+    this.playerOne.y_velocity = 0;
+    // Init State-Position of P2
+    this.playerTwo.left = this.canvasWidth - this.canvasWidth / 8 - 200;
+    this.playerTwo.x_velocity = 0;
+    this.playerTwo.y_velocity = 0;
+    this.isRoundOver = false;
+
+    this.startRoundTimer();
+    this.timeLeft = this.roundDuration;
+    this.updateTimerDisplay();
+    this.loop();
+  }
   update() {
     this.playerOne.move();
     this.playerTwo.move();
     this.ball.moveBall();
     this.detectCollision();
   }
-  endGame() {
-    console.log('GAME OVER');
-    this.isGameOver = true;
-
-    this.gameScreen.style.display = 'none';
-    this.endGameScreen.style.display = 'block';
-  }
   checkScore() {
-    //  Call to the BallBomb() method that evaluates if:
-    //  - it touched the ground
-    //  - which was the last player to touch the ball
-
     if (this.ball.didHitGround()) {
-      const ball = this.ball.ball;
-      const ballRect = ball.getBoundingClientRect();
+      const ballElementDOM = this.ball.element_DOM;
+      const ballRect = ballElementDOM.getBoundingClientRect();
 
-      if (ballRect.x > 0 && ballRect.x < this.width / 2) {
-        this.playerTwo.score++;
+      if (
+        Math.floor(ballRect.x + 20 - 112) + 20 > 0 &&
+        Math.floor(ballRect.x + 20 - 112) < this.canvasWidth / 2
+      ) {
+        this.p2Score++;
+        this.p2WonRound = true;
+        this.isRoundOver = true;
       }
-      if (ballRect.x > this.width / 2 && ballRect.x < this.width) {
-        this.playerOne.score++;
+      if (
+        Math.floor(ballRect.x + 20 - 112) > this.canvasWidth / 2 &&
+        Math.floor(ballRect.x + 20 - 112) < this.canvasWidth
+      ) {
+        this.p1Score++;
+        this.p2WonRound = false;
+        this.isRoundOver = true;
       }
-      this.isRoundOver = true;
     }
-
-    if (this.playerOne.score === this.maxScore) {
-      this.endGame();
-    }
-    if (this.playerTwo.score === this.maxScore) {
-      this.endGame();
-    }
-
     const playerOneScoreDOM = document.getElementById(
       'player-one-number-score'
     );
-    playerOneScoreDOM.innerText = this.playerOne.score;
+    playerOneScoreDOM.innerText = this.p1Score;
     const playerTwoScoreDOM = document.getElementById(
       'player-two-number-score'
     );
-    playerTwoScoreDOM.innerText = this.playerTwo.score;
+    playerTwoScoreDOM.innerText = this.p2Score;
   }
-
   detectCollision() {
-    const playerOne = this.playerOne.playerElement;
-    const playerTwo = this.playerTwo.playerElement;
-    const ball = this.ball.ball;
-    // console.log('kick the ball');
-    const playerOneRect = playerOne.getBoundingClientRect();
-    const playerTwoRect = playerTwo.getBoundingClientRect();
+    //  Ball's data:
+    const ball = this.ball.element_DOM;
     const ballRect = ball.getBoundingClientRect();
+    const ball_leftPos = ballRect.left;
+    const ball_rightPos = ballRect.right;
+    const ball_topPos = ballRect.top;
+    const ball_bottomPos = ballRect.bottom;
+    const ball_centerPos = this.ball.width / 2;
+    //  Player 1 data:
+    const p1 = this.playerOne.playerElement;
+    const p1Rect = p1.getBoundingClientRect();
+    const p1_leftPos = p1Rect.left;
+    const p1_rightPos = p1Rect.right;
+    const p1_topPos = p1Rect.top;
+    const p1_bottomPos = p1Rect.bottom;
+    const p1_centerPos = this.playerOne.width / 2;
+    //  Player 2 data:
+    const p2 = this.playerTwo.playerElement;
+    const p2Rect = p2.getBoundingClientRect();
+    const p2_leftPos = p2Rect.left;
+    const p2_rightPos = p2Rect.right;
+    const p2_topPos = p2Rect.top;
+    const p2_bottomPos = p2Rect.bottom;
+    const p2_centerPos = this.playerTwo.width / 2;
 
-    // console.log('Player One Rect:', playerOneRect);
-
-    if (playerOne && playerTwo && ball) {
+    if (p1 && p2 && ball) {
+      // Detect collision with P1
       if (
-        ballRect.right > playerOneRect.left &&
-        ballRect.left < playerOneRect.right &&
-        ballRect.top < playerOneRect.bottom &&
-        ballRect.bottom > playerOneRect.top
+        ball_rightPos > p1_leftPos &&
+        ball_leftPos < p1_rightPos &&
+        ball_topPos < p1_bottomPos &&
+        ball_bottomPos > p1_topPos
       ) {
-        console.log(this.playerOne.score);
-        // console.log('Ball Left:', ballRect.left);
-        // console.log('Ball Right:', ballRect.right);
-        // console.log('-----');
-        // console.log('Player Left:', playerOneRect.left);
-        // console.log('Player Right:', playerOneRect.right);
-        // console.log('*****');
-
-        // To the Left
+        // Ball touches the top of the player 1, bounces straight up:
         if (
-          ballRect.left + 20 > playerOneRect.left &&
-          ballRect.left + 20 < playerOneRect.left + 60
+          Math.floor(ball_leftPos + ball_centerPos) ===
+          Math.floor(p1_leftPos + p1_centerPos)
         ) {
-          this.ball.velocityX = -Math.abs(this.ball.velocityX);
-          // alert(`
-          //   LEFT! Ball X: ${ballRect.left + 20};
-          //   Player Left: ${playerOneRect.left}
-          //   Player Half: ${playerOneRect.left + 60}
-          //   VelocityX: ${this.ball.velocityX}
-          //   `);
+          this.ball.velocityX = 0;
         }
-        // To the Right
-        if (
-          ballRect.left + 20 > playerOneRect.left + 60 &&
-          ballRect.left + 20 < playerOneRect.right
+        // Ball touches the back of P1 -> Ball's direction is negative (left)
+        else if (
+          ball_leftPos + ball_centerPos > p1_leftPos &&
+          ball_leftPos + ball_centerPos < p1_leftPos + p1_centerPos
         ) {
+          if (this.ball.velocityX === 0) this.ball.velocityX = -8;
+          this.ball.velocityX = -Math.abs(this.ball.velocityX);
+        }
+        // Ball touches the front of P1 -> Ball's direction is positive (right)
+        else if (
+          ball_leftPos + ball_centerPos > p1_leftPos + p1_centerPos &&
+          ball_leftPos + ball_centerPos < p1_rightPos
+        ) {
+          if (this.ball.velocityX === 0) this.ball.velocityX = 8;
           this.ball.velocityX = Math.abs(this.ball.velocityX);
-          //   alert(`
-          //     RIGHT! Ball X: ${ballRect.left + 20};
-          //     Player Half: ${playerOneRect.left + 60}
-          //     Player Right: ${playerOneRect.right}
-          //     VelocityX: ${this.ball.velocityX}
-          // `);
         }
 
         if (this.ball.velocityY > 0) {
@@ -181,38 +233,37 @@ class Game {
         }
       }
 
+      // Detect collision with P2
       if (
-        ballRect.right > playerTwoRect.left &&
-        ballRect.left < playerTwoRect.right &&
-        ballRect.top < playerTwoRect.bottom &&
-        ballRect.bottom > playerTwoRect.top
+        ball_rightPos > p2_leftPos &&
+        ball_leftPos < p2_rightPos &&
+        ball_topPos < p2_bottomPos &&
+        ball_bottomPos > p2_topPos
       ) {
-        console.log('Collision with Player Two.');
-        // To the Left
+        // console.log('Ball', Math.floor(ball_leftPos + ball_centerPos));
+        // console.log('P2', Math.floor(p2_leftPos + p2_centerPos));
+        // Ball touches the top of the player 1, bounces straight up:
         if (
-          ballRect.left + 20 > playerTwoRect.left &&
-          ballRect.left + 20 < playerTwoRect.left + 60
+          Math.floor(ball_leftPos + ball_centerPos) ===
+          Math.floor(p2_leftPos + p2_centerPos)
         ) {
-          this.ball.velocityX = -Math.abs(this.ball.velocityX);
-          // alert(`
-          //   LEFT! Ball X: ${ballRect.left + 20};
-          //   Player Left: ${playerOneRect.left}
-          //   Player Half: ${playerOneRect.left + 60}
-          //   VelocityX: ${this.ball.velocityX}
-          //   `);
+          this.ball.velocityX = 0;
         }
-        // To the Right
-        if (
-          ballRect.left + 20 > playerTwoRect.left + 60 &&
-          ballRect.left + 20 < playerTwoRect.right
+        // Ball touches the front of P2 -> Ball's direction is negative (left)
+        else if (
+          ball_leftPos + ball_centerPos > p2_leftPos &&
+          ball_leftPos + ball_centerPos < p2_leftPos + p2_centerPos
         ) {
+          if (this.ball.velocityX === 0) this.ball.velocityX = -8;
+          this.ball.velocityX = -Math.abs(this.ball.velocityX);
+        }
+        // Ball touches the back of P2 -> Ball's direction is positive (right)
+        else if (
+          ball_leftPos + ball_centerPos > p2_leftPos + p2_centerPos &&
+          ball_leftPos + ball_centerPos < p2_rightPos
+        ) {
+          if (this.ball.velocityX === 0) this.ball.velocityX = 8;
           this.ball.velocityX = Math.abs(this.ball.velocityX);
-          //   alert(`
-          //     RIGHT! Ball X: ${ballRect.left + 20};
-          //     Player Half: ${playerOneRect.left + 60}
-          //     Player Right: ${playerOneRect.right}
-          //     VelocityX: ${this.ball.velocityX}
-          // `);
         }
         if (this.ball.velocityY > 0) {
           this.ball.velocityY = -this.ball.velocityY;
@@ -220,10 +271,29 @@ class Game {
       }
     }
   }
+  // ******
+  endGame() {
+    this.gameScreen.style.display = 'none';
+    this.endGameScreen.style.display = 'block';
+  }
 
-  repositionScreen() {
-    this.playerOne.reposition(100);
-    this.playerTwo.reposition(800);
-    this.ball.reposition(400, 250);
+  isGameOver() {
+    this.playerOneFinalScore.innerText = `Player 1 Score: ${this.p1Score}`;
+    this.playerTwoFinalScore.innerText = `Player 2 Score: ${this.p2Score}`;
+
+    if (this.p1Score === this.maxScore) {
+      this.winner = 'Player One';
+      // alert('P1 Wins!');
+      this.gameResult.innerText = `${this.winner} Wins!`;
+      return true;
+    }
+    if (this.p2Score === this.maxScore) {
+      this.winner = 'Player Two';
+      // alert('P2 Wins!');
+      this.gameResult.innerText = `${this.winner} Wins!`;
+      return true;
+    }
+
+    return false;
   }
 }

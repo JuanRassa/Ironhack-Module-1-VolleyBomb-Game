@@ -6,10 +6,7 @@ class Ball {
     left,
     top,
     width,
-    height,
-    radius,
-    velocityX,
-    velocityY
+    height
   ) {
     this.gameCanvas = gameCanvas;
     this.gameCanvasWidth = gameCanvasWidth;
@@ -18,23 +15,23 @@ class Ball {
     this.top = top;
     this.width = width;
     this.height = height;
-    this.velocityX = 8;
+    this.velocityX = 0;
     this.velocityY = 8;
     this.gravity = 0.5;
-    this.ball = document.createElement('div');
+    this.element_DOM = document.createElement('div');
 
     this.addBall();
   }
 
   addBall() {
-    this.ball.style.top = `${this.top}px`;
-    this.ball.style.left = `${this.left}px`;
-    this.ball.style.width = `${this.width}px`;
-    this.ball.style.height = `${this.height}px`;
-    this.ball.style.position = 'absolute';
+    this.element_DOM.style.top = `${this.top}px`;
+    this.element_DOM.style.left = `${this.left}px`;
+    this.element_DOM.style.width = `${this.width}px`;
+    this.element_DOM.style.height = `${this.height}px`;
+    this.element_DOM.style.position = 'absolute';
 
-    this.ball.classList.add('ball');
-    this.gameCanvas.appendChild(this.ball);
+    this.element_DOM.classList.add('ball');
+    this.gameCanvas.appendChild(this.element_DOM);
     console.log(this.gameCanvasWidth);
   }
 
@@ -69,8 +66,8 @@ class Ball {
   }
 
   updatedPosition() {
-    this.ball.style.top = `${this.top}px`;
-    this.ball.style.left = `${this.left}px`;
+    this.element_DOM.style.top = `${this.top}px`;
+    this.element_DOM.style.left = `${this.left}px`;
   }
   didHitGround() {
     if (this.top + this.height >= this.gameCanvasHeight) {
