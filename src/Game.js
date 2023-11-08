@@ -10,33 +10,9 @@ class Game {
     this.canvasHeight = canvasHeight;
 
     this.net = new Net(this.gameCanvas, 10, 50, canvasWidth / 2, 'gold');
-    this.playerOne = new Player(
-      this.gameCanvas,
-      canvasWidth / 8,
-      120,
-      60,
-      './assets/Player1.png',
-      true
-    );
-    this.playerTwo = new Player(
-      this.gameCanvas,
-      canvasWidth - canvasWidth / 8 - 200,
-      120,
-      60,
-      './assets/Player2.png',
-      false
-    );
-    this.ball = new Ball(
-      this.gameCanvas,
-      canvasWidth,
-      canvasHeight,
-      this.canvasWidth / 8 + 38,
-      50,
-      44,
-      44,
-      this.playerOne,
-      this.playerTwo
-    );
+    this.playerOne = new Player(this.gameCanvas, canvasWidth / 8, 120, 60, './assets/Player1.png', true);
+    this.playerTwo = new Player(this.gameCanvas, canvasWidth - canvasWidth / 8 - 200, 120, 60, './assets/Player2.png', false);
+    this.ball = new Ball(this.gameCanvas, canvasWidth, canvasHeight, this.canvasWidth / 8 + 38, 50, 44, 44, this.playerOne, this.playerTwo);
 
     this.p1Score = 0;
     this.p2Score = 0;
@@ -56,7 +32,7 @@ class Game {
     this.playerOneFinalScore = document.getElementById('player-one-finalscore');
     this.playerTwoFinalScore = document.getElementById('player-two-finalscore');
   }
-  d;
+
   // METHODS
   start() {
     this.gameCanvas.style.width = `${this.canvasWidth}px`;
@@ -144,30 +120,20 @@ class Game {
       const ballElementDOM = this.ball.element_DOM;
       const ballRect = ballElementDOM.getBoundingClientRect();
 
-      if (
-        Math.floor(ballRect.x + 20 - 112) + 20 > 0 &&
-        Math.floor(ballRect.x + 20 - 112) < this.canvasWidth / 2
-      ) {
+      if (Math.floor(ballRect.x + 20 - 112) + 20 > 0 && Math.floor(ballRect.x + 20 - 112) < this.canvasWidth / 2) {
         this.p2Score++;
         this.p2WonRound = true;
         this.isRoundOver = true;
       }
-      if (
-        Math.floor(ballRect.x + 20 - 112) > this.canvasWidth / 2 &&
-        Math.floor(ballRect.x + 20 - 112) < this.canvasWidth
-      ) {
+      if (Math.floor(ballRect.x + 20 - 112) > this.canvasWidth / 2 && Math.floor(ballRect.x + 20 - 112) < this.canvasWidth) {
         this.p1Score++;
         this.p2WonRound = false;
         this.isRoundOver = true;
       }
     }
-    const playerOneScoreDOM = document.getElementById(
-      'player-one-number-score'
-    );
+    const playerOneScoreDOM = document.getElementById('player-one-number-score');
     playerOneScoreDOM.innerText = this.p1Score;
-    const playerTwoScoreDOM = document.getElementById(
-      'player-two-number-score'
-    );
+    const playerTwoScoreDOM = document.getElementById('player-two-number-score');
     playerTwoScoreDOM.innerText = this.p2Score;
   }
   detectCollision() {
@@ -198,32 +164,18 @@ class Game {
 
     if (p1 && p2 && ball) {
       // Detect collision with P1
-      if (
-        ball_rightPos > p1_leftPos &&
-        ball_leftPos < p1_rightPos &&
-        ball_topPos < p1_bottomPos &&
-        ball_bottomPos > p1_topPos
-      ) {
+      if (ball_rightPos > p1_leftPos && ball_leftPos < p1_rightPos && ball_topPos < p1_bottomPos && ball_bottomPos > p1_topPos) {
         // Ball touches the top of the player 1, bounces straight up:
-        if (
-          Math.floor(ball_leftPos + ball_centerPos) ===
-          Math.floor(p1_leftPos + p1_centerPos)
-        ) {
+        if (Math.floor(ball_leftPos + ball_centerPos) === Math.floor(p1_leftPos + p1_centerPos)) {
           this.ball.velocityX = 0;
         }
         // Ball touches the back of P1 -> Ball's direction is negative (left)
-        else if (
-          ball_leftPos + ball_centerPos > p1_leftPos &&
-          ball_leftPos + ball_centerPos < p1_leftPos + p1_centerPos
-        ) {
+        else if (ball_leftPos + ball_centerPos > p1_leftPos && ball_leftPos + ball_centerPos < p1_leftPos + p1_centerPos) {
           if (this.ball.velocityX === 0) this.ball.velocityX = -8;
           this.ball.velocityX = -Math.abs(this.ball.velocityX);
         }
         // Ball touches the front of P1 -> Ball's direction is positive (right)
-        else if (
-          ball_leftPos + ball_centerPos > p1_leftPos + p1_centerPos &&
-          ball_leftPos + ball_centerPos < p1_rightPos
-        ) {
+        else if (ball_leftPos + ball_centerPos > p1_leftPos + p1_centerPos && ball_leftPos + ball_centerPos < p1_rightPos) {
           if (this.ball.velocityX === 0) this.ball.velocityX = 8;
           this.ball.velocityX = Math.abs(this.ball.velocityX);
         }
@@ -234,34 +186,20 @@ class Game {
       }
 
       // Detect collision with P2
-      if (
-        ball_rightPos > p2_leftPos &&
-        ball_leftPos < p2_rightPos &&
-        ball_topPos < p2_bottomPos &&
-        ball_bottomPos > p2_topPos
-      ) {
+      if (ball_rightPos > p2_leftPos && ball_leftPos < p2_rightPos && ball_topPos < p2_bottomPos && ball_bottomPos > p2_topPos) {
         // console.log('Ball', Math.floor(ball_leftPos + ball_centerPos));
         // console.log('P2', Math.floor(p2_leftPos + p2_centerPos));
         // Ball touches the top of the player 1, bounces straight up:
-        if (
-          Math.floor(ball_leftPos + ball_centerPos) ===
-          Math.floor(p2_leftPos + p2_centerPos)
-        ) {
+        if (Math.floor(ball_leftPos + ball_centerPos) === Math.floor(p2_leftPos + p2_centerPos)) {
           this.ball.velocityX = 0;
         }
         // Ball touches the front of P2 -> Ball's direction is negative (left)
-        else if (
-          ball_leftPos + ball_centerPos > p2_leftPos &&
-          ball_leftPos + ball_centerPos < p2_leftPos + p2_centerPos
-        ) {
+        else if (ball_leftPos + ball_centerPos > p2_leftPos && ball_leftPos + ball_centerPos < p2_leftPos + p2_centerPos) {
           if (this.ball.velocityX === 0) this.ball.velocityX = -8;
           this.ball.velocityX = -Math.abs(this.ball.velocityX);
         }
         // Ball touches the back of P2 -> Ball's direction is positive (right)
-        else if (
-          ball_leftPos + ball_centerPos > p2_leftPos + p2_centerPos &&
-          ball_leftPos + ball_centerPos < p2_rightPos
-        ) {
+        else if (ball_leftPos + ball_centerPos > p2_leftPos + p2_centerPos && ball_leftPos + ball_centerPos < p2_rightPos) {
           if (this.ball.velocityX === 0) this.ball.velocityX = 8;
           this.ball.velocityX = Math.abs(this.ball.velocityX);
         }
