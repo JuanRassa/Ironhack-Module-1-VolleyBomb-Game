@@ -1,5 +1,5 @@
 header#score-section {
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 
   margin-bottom: 30px;
@@ -8,23 +8,23 @@ header#score-section {
   display: flex;
   gap: 15px;
 }
-.score-circle {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  border: 1px solid white;
-}
-.inactive-score {
-  background-color: transparent;
-}
-.active-score {
-  background-color: #fff;
-}
 
+.score-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  padding: 5px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
 #score-player-1 {
+  background-color: red;
 }
 #score-player-2 {
+  background-color: green;
 }
-#timer-bomb span {
+#timer-bomb {
   font-size: 2.5rem;
 }

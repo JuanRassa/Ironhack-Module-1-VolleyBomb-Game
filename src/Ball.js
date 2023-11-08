@@ -1,13 +1,5 @@
 class Ball {
-  constructor(
-    gameCanvas,
-    gameCanvasWidth,
-    gameCanvasHeight,
-    left,
-    top,
-    width,
-    height
-  ) {
+  constructor(gameCanvas, gameCanvasWidth, gameCanvasHeight, left, top, width, height) {
     this.gameCanvas = gameCanvas;
     this.gameCanvasWidth = gameCanvasWidth;
     this.gameCanvasHeight = gameCanvasHeight;
@@ -18,7 +10,9 @@ class Ball {
     this.velocityX = 0;
     this.velocityY = 8;
     this.gravity = 0.5;
+
     this.element_DOM = document.createElement('div');
+    this.explosion_element_DOM = undefined;
 
     this.addBall();
   }
@@ -32,7 +26,6 @@ class Ball {
 
     this.element_DOM.classList.add('ball');
     this.gameCanvas.appendChild(this.element_DOM);
-    console.log(this.gameCanvasWidth);
   }
 
   moveBall() {
@@ -81,5 +74,15 @@ class Ball {
       this.left = newLeft;
       this.bottom = newBottom;
     }
+  }
+  explosion() {
+    const explotionPosition = this.element_DOM.getBoundingClientRect();
+    this.element_DOM.style.display = 'none';
+    this.explosion_element_DOM = document.createElement('div');
+    this.explosion_element_DOM.style.position = `absolute`;
+    this.explosion_element_DOM.style.top = `${explotionPosition.top - 100}px`;
+    this.explosion_element_DOM.style.left = `${explotionPosition.left - 40}px`;
+    this.explosion_element_DOM.classList.add('explosion');
+    this.gameCanvas.appendChild(this.explosion_element_DOM);
   }
 }

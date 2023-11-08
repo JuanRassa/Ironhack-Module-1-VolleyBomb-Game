@@ -8,7 +8,7 @@
 #game-result {
   font-size: 42px;
   padding-bottom: 50px;
-  padding-top: 200px;
+  /* padding-top: 200px; */
 }
 
 #final-score > p {

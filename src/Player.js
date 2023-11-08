@@ -46,12 +46,12 @@ class Player {
 
     // Left Direction Movement
     if (this.left_dir) {
-      this.x_velocity -= 0.8;
+      this.x_velocity -= 0.9;
     }
 
     // Right Direction Movements
     if (this.right_dir) {
-      this.x_velocity += 0.8;
+      this.x_velocity += 0.9;
     }
 
     //  Prevent the player to go beneath the ground :)
