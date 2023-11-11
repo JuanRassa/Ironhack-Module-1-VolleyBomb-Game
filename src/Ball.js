@@ -55,6 +55,10 @@ class Ball {
     this.left += this.velocityX;
     this.top += this.velocityY;
 
+    if (this.velocityX > 0) this.element_DOM.style.rotate = '-60deg';
+    if (this.velocityX < 0) this.element_DOM.style.rotate = '60deg';
+    if (this.velocityX === 0) this.element_DOM.style.rotate = '0deg';
+
     this.updatedPosition();
   }
 

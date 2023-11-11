@@ -44,6 +44,8 @@ class Game {
     this.gameResult = document.getElementById('game-result');
     this.playerOneFinalScore = document.getElementById('player-one-finalscore');
     this.playerTwoFinalScore = document.getElementById('player-two-finalscore');
+
+    this.explosionSound = new Audio('/assets/audio/bomb-explosion.wav');
   }
 
   // METHODS
@@ -145,6 +147,7 @@ class Game {
       const ballElementDOM = this.ball.element_DOM;
       const ballRect = ballElementDOM.getBoundingClientRect();
       const gameCanvasRect = this.gameCanvas.getBoundingClientRect();
+      this.explosionSound.play();
       if (Math.floor(ballRect.x + 22 - gameCanvasRect.x) > 0 && Math.floor(ballRect.x + 22 - gameCanvasRect.x) < this.canvasWidth / 2) {
         this.p2Score++;
         this.p2WonRound = true;
