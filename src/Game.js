@@ -209,7 +209,7 @@ class Game {
 
     // if (p1 && p2 && ball) {
     // Detect collision with P1
-    if (ball_rightPos > p1_leftPos && ball_leftPos < p1_rightPos && ball_bottomPos > p1_topPos) {
+    if (ball_rightPos > p1_leftPos && ball_leftPos < p1_rightPos && ball_topPos < p1_bottomPos && ball_bottomPos > p1_topPos) {
       console.log('*************');
       console.log('BALL:', ballRect);
 
@@ -245,7 +245,7 @@ class Game {
     }
 
     // Detect collision with P2
-    if (ball_rightPos > p2_leftPos && ball_leftPos < p2_rightPos && ball_bottomPos > p2_topPos) {
+    if (ball_rightPos > p2_leftPos && ball_leftPos < p2_rightPos && ball_topPos < p2_bottomPos && ball_bottomPos > p2_topPos) {
       console.log('*************');
       console.log('BALL:', ballRect);
 
