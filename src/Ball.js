@@ -35,7 +35,6 @@ class Ball {
     if (this.left + this.width >= this.gameCanvasWidth) {
       this.velocityX = -this.velocityX; // Change the x direction
       this.left = this.gameCanvasWidth - this.width; // Repositioning inside the canvas
-      this.wallAudio.play();
     }
     if (this.left <= 0) {
       this.velocityX = -this.velocityX; // Change the x direction
@@ -52,6 +51,7 @@ class Ball {
     if (this.top <= 0) {
       this.velocityY = -this.velocityY; // Change the y direction
       this.top = 0; // Repositioning inside the canvas
+      this.wallAudio.play();
     }
 
     // Update ball position

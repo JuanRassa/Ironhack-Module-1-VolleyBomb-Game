@@ -1,7 +1,6 @@
 header#score-section {
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 30px;
   position: relative;
 }
 .score-display {

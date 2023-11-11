@@ -24,7 +24,7 @@ class Game {
       this.playerOne,
       this.playerTwo
     );
-    this.gameBallVelocity = 11;
+    this.gameBallVelocity = 8;
 
     this.p1Score = 0;
     this.p2Score = 0;
