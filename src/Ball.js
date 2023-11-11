@@ -55,6 +55,10 @@ class Ball {
     this.left += this.velocityX;
     this.top += this.velocityY;
 
+    if (this.velocityX > 0) this.element_DOM.style.rotate = '-60deg';
+    if (this.velocityX < 0) this.element_DOM.style.rotate = '60deg';
+    if (this.velocityX === 0) this.element_DOM.style.rotate = '0deg';
+
     this.updatedPosition();
   }
 
@@ -77,11 +81,12 @@ class Ball {
   }
   explosion() {
     const explotionPosition = this.element_DOM.getBoundingClientRect();
+
     this.element_DOM.style.display = 'none';
     this.explosion_element_DOM = document.createElement('div');
     this.explosion_element_DOM.style.position = `absolute`;
     this.explosion_element_DOM.style.top = `${explotionPosition.top - 100}px`;
-    this.explosion_element_DOM.style.left = `${explotionPosition.left - 40}px`;
+    this.explosion_element_DOM.style.left = `${explotionPosition.left - this.gameCanvas.getBoundingClientRect().x}px`;
     this.explosion_element_DOM.classList.add('explosion');
     this.gameCanvas.appendChild(this.explosion_element_DOM);
   }
