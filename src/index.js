@@ -4,6 +4,22 @@ window.onload = function () {
   // const restartButton = document.querySelector('.restart-button');
   const game = new Game(1200, 480);
 
+  const soundToggle = document.querySelector('#sound-toggle-header');
+  let isPlaying = false;
+  const song = new Audio('/assets/audio/track.mp3');
+  song.loop = true;
+  song.volume = 0.5;
+  soundToggle.addEventListener('click', () => {
+    if (!isPlaying) {
+      isPlaying = true;
+      song.play();
+      soundToggle.classList.add('sound-on');
+      soundToggle.classList.off('sound-off');
+    }
+    !isPlaying ? song.play() : song.pause();
+    !isPlaying ? (isPlaying = true) : (isPlaying = false);
+  });
+
   startButton.addEventListener('click', () => {
     game.start();
     window.addEventListener('keydown', e => game.playerOne.movementController(e));

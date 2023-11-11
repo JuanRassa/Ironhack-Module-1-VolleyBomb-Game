@@ -11,7 +11,7 @@ class Net {
   }
   addNet() {
     this.netElement.style.bottom = `0px`;
-    this.netElement.style.left = `${this.x_position}px`;
+    this.netElement.style.left = `${this.x_position + this.width / 2}px`;
     this.netElement.style.width = `${this.width}px`;
     this.netElement.style.height = `${this.height}px`;
     this.netElement.style.background = this.netColor;

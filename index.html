@@ -1,86 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap"
-      rel="stylesheet"
-    />
 
-    <link rel="stylesheet" href="styles/0-reset.css" />
-    <link rel="stylesheet" href="styles/1-globals.css" />
-    <link rel="stylesheet" href="styles/2-header.css" />
-    <link rel="stylesheet" href="styles/3-welcome-screen.css" />
-    <link rel="stylesheet" href="styles/4-game-screen.css" />
-    <link rel="stylesheet" href="styles/5-end-game-screen.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet" />
 
-    <title>VolleyBomb</title>
-  </head>
+  <link rel="stylesheet" href="styles/0-reset.css" />
+  <link rel="stylesheet" href="styles/1-globals.css" />
+  <link rel="stylesheet" href="styles/2-header.css" />
+  <link rel="stylesheet" href="styles/3-welcome-screen.css" />
+  <link rel="stylesheet" href="styles/4-game-screen.css" />
+  <link rel="stylesheet" href="styles/5-end-game-screen.css" />
 
-  <body class="body-welcome-state">
-    <!-- Homepage -->
-    <header id="score-section" class="center-main-sections flex-main-sections">
-      <div id="score-player-1" class="score-display">0</div>
-      <div id="timer-bomb">
-        <span>20s</span>
-      </div>
-      <div id="score-player-2" class="score-display">0</div>
-    </header>
-    <section
-      id="welcome-screen"
-      class="center-main-sections flex-main-sections"
-    >
-      <img src="/assets/gamelogo.png" class="game-logo" />
-      <!-- <h1 class="game-title">VolleyBomb</h1> -->
-      <div class="game-rules">
-        <ul>
-          <li>It's a 2 player Volleyball Game.</li>
-          <li>Player 1 is on the left and Player 2 is on the right.</li>
-          <li>
-            Return the bomb before the timer ends to avoid opponent scoring.
-          </li>
-          <li>Ground touch on your side gives opponent a point.</li>
-          <li>First to score 5 points wins!</li>
-        </ul>
-      </div>
+  <title>VolleyBomb</title>
+</head>
 
-      <div class="game-controls">
-        <ul>
-          <li>Player 1 controls: W, A, D</li>
-          <li>Player 2 controls: Up, Left, Right</li>
-        </ul>
-      </div>
+<body class="body-welcome-state">
+  <!-- Homepage -->
+  <header id="score-section" class="center-main-sections flex-main-sections">
+    <div id="score-player-1" class="score-display">0</div>
+    <div id="timer-bomb">
+      <span>20s</span>
+    </div>
+    <div id="score-player-2" class="score-display">0</div>
+    <button id="sound-toggle-header" class="sound-off"></button>
+  </header>
+  <section id="welcome-screen" class="center-main-sections flex-main-sections">
+    <img src="/assets/gamelogo.png" class="game-logo" />
+    <!-- <h1 class="game-title">VolleyBomb</h1> -->
+    <div class="game-rules">
+      <ul>
+        <li>It's a 2 player Volleyball Game.</li>
+        <li>Player 1 is on the left and Player 2 is on the right.</li>
+        <li>
+          Return the bomb before the timer ends to avoid opponent scoring.
+        </li>
+        <li>Ground touch on your side gives opponent a point.</li>
+        <li>First to score 5 points wins!</li>
+      </ul>
+    </div>
 
-      <button class="start-button">Start Game</button>
-    </section>
+    <div class="game-controls">
+      <ul>
+        <li>Player 1 controls: W, A, D</li>
+        <li>Player 2 controls: Up, Left, Right</li>
+      </ul>
+    </div>
 
-    <section
-      id="game-screen"
-      class="center-main-sections flex-main-sections display-none opacity-out"
-    >
-      <div id="game-canvas"></div>
-    </section>
-    <section
-      id="end-game-screen"
-      class="center-main-sections flex-main-sections"
-    >
-      <h2 id="game-result">Player X wins!!</h2>
-      <div id="final-score">
-        <p id="player-one-finalscore">Player 1 Score:</p>
-        <p id="player-two-finalscore">Player 2 Score:</p>
-      </div>
-      <button id="restart-button">Play Again</button>
-    </section>
+    <button class="start-button">Start Game</button>
+  </section>
 
-    <!-- <script src="/src/canvasTest.js"></script> -->
-    <script src="/src/Round.js"></script>
-    <script src="/src/Net.js"></script>
-    <script src="/src/Ball.js"></script>
-    <script src="/src/Player.js"></script>
-    <script src="/src/Game.js"></script>
-    <script src="/src/index.js" type="module"></script>
-  </body>
+  <section id="game-screen" class="center-main-sections flex-main-sections display-none opacity-out">
+    <div id="game-canvas"></div>
+  </section>
+  <section id="end-game-screen" class="center-main-sections flex-main-sections">
+    <h2 id="game-result">Player X wins!!</h2>
+    <div id="final-score">
+      <p id="player-one-finalscore">Player 1 Score:</p>
+      <p id="player-two-finalscore">Player 2 Score:</p>
+    </div>
+    <button id="restart-button">Play Again</button>
+  </section>
+
+  <!-- <script src="/src/canvasTest.js"></script> -->
+  <script src="/src/Round.js"></script>
+  <script src="/src/Net.js"></script>
+  <script src="/src/Ball.js"></script>
+  <script src="/src/Player.js"></script>
+  <script src="/src/Game.js"></script>
+  <script src="/src/index.js" type="module"></script>
+</body>
+
 </html>
