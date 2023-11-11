@@ -2,7 +2,7 @@ window.onload = function () {
   const startButton = document.querySelector('.start-button');
   const endButton = document.querySelector('#restart-button');
   // const restartButton = document.querySelector('.restart-button');
-  const game = new Game(1200, 600);
+  const game = new Game(1200, 550);
 
   const soundToggle = document.querySelector('#sound-toggle-header');
   let isPlaying = false;
