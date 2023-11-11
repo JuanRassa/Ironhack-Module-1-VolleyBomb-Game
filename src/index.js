@@ -6,6 +6,9 @@ window.onload = function () {
 
   startButton.addEventListener('click', () => {
     game.start();
+    const song = new Audio('/assets/audio/track.mp3');
+    song.loop = true;
+    song.play();
     window.addEventListener('keydown', e => game.playerOne.movementController(e));
     window.addEventListener('keyup', e => game.playerOne.movementController(e));
     window.addEventListener('keydown', e => game.playerTwo.movementController(e));

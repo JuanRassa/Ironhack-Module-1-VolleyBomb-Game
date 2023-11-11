@@ -43,7 +43,6 @@ class Ball {
 
     // Y-axis movement direction control
     if (this.top + this.height >= this.gameCanvasHeight) {
-      console.log('BALL GROUND:', this.element_DOM.getBoundingClientRect());
       this.velocityY = -this.velocityY; // Change the y direction
       this.top = this.gameCanvasHeight - this.height; // Repositioning inside the canvas
     }
@@ -78,11 +77,12 @@ class Ball {
   }
   explosion() {
     const explotionPosition = this.element_DOM.getBoundingClientRect();
+
     this.element_DOM.style.display = 'none';
     this.explosion_element_DOM = document.createElement('div');
     this.explosion_element_DOM.style.position = `absolute`;
     this.explosion_element_DOM.style.top = `${explotionPosition.top - 100}px`;
-    this.explosion_element_DOM.style.left = `${explotionPosition.left - 40}px`;
+    this.explosion_element_DOM.style.left = `${explotionPosition.left - this.gameCanvas.getBoundingClientRect().x}px`;
     this.explosion_element_DOM.classList.add('explosion');
     this.gameCanvas.appendChild(this.explosion_element_DOM);
   }

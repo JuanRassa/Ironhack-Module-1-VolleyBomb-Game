@@ -16,7 +16,8 @@ class Game {
       this.gameCanvas,
       canvasWidth,
       canvasHeight,
-      this.canvasWidth / 2 - this.canvasWidth / 4 - 82,
+      // this.canvasWidth / 2 - this.canvasWidth / 4 - 82,
+      this.canvasWidth / 2 + this.canvasWidth / 4 + 37,
       50,
       44,
       44,
@@ -210,31 +211,17 @@ class Game {
     // if (p1 && p2 && ball) {
     // Detect collision with P1
     if (ball_rightPos > p1_leftPos && ball_leftPos < p1_rightPos && ball_topPos < p1_bottomPos && ball_bottomPos > p1_topPos) {
-      console.log('*************');
-      console.log('BALL:', ballRect);
-
-      console.log('PLAYER 1:', p1Rect);
-      console.log('*************');
-      this.ball.velocityX;
-
       // Ball touches the top of the player 1, bounces straight up:
-      console.log(Math.floor(ball_leftPos + ball_centerPos));
-      console.log(Math.floor(p1_leftPos + p1_centerPos));
-      console.log('*********');
-      console.log('P1 Left:', p1_leftPos);
-      console.log('Ball left:', ball_leftPos);
-      console.log('Ball center:', ball_leftPos + ball_centerPos);
-      console.log('P1 left center:', p1_leftPos + p1_centerPos);
       if (Math.floor(ball_leftPos + ball_centerPos) === Math.floor(p1_leftPos + p1_centerPos)) {
         this.ball.velocityX = 0;
       }
       // Ball touches the back of P1 -> Ball's direction is negative (left)
-      else if (ball_leftPos + ball_centerPos > p1_leftPos && ball_leftPos + ball_centerPos < p1_leftPos + p1_centerPos) {
+      else if (ball_rightPos > p1_leftPos && ball_rightPos < p1_leftPos + p1_centerPos) {
         if (this.ball.velocityX === 0) this.ball.velocityX = -this.gameBallVelocity;
         this.ball.velocityX = -Math.abs(this.ball.velocityX);
       }
       // Ball touches the front of P1 -> Ball's direction is positive (right)
-      else if (ball_leftPos + ball_centerPos > p1_leftPos + p1_centerPos && ball_leftPos + ball_centerPos < p1_rightPos) {
+      else if (ball_leftPos >= p1_leftPos + p1_centerPos && ball_leftPos <= p1_rightPos) {
         if (this.ball.velocityX === 0) this.ball.velocityX = this.gameBallVelocity;
         this.ball.velocityX = Math.abs(this.ball.velocityX);
       }
@@ -246,33 +233,18 @@ class Game {
 
     // Detect collision with P2
     if (ball_rightPos > p2_leftPos && ball_leftPos < p2_rightPos && ball_topPos < p2_bottomPos && ball_bottomPos > p2_topPos) {
-      console.log('*************');
-      console.log('BALL:', ballRect);
-
-      console.log('PLAYER 2:', p2Rect);
-      console.log('*************');
-      this.ball.velocityX;
-
-      console.log(Math.floor(ball_leftPos + ball_centerPos));
-      console.log(Math.floor(p2_leftPos + p2_centerPos));
-      console.log('*********');
-      console.log('P2 Left:', p2_leftPos);
-      console.log('Ball left:', ball_leftPos);
-      console.log('Ball center:', ball_leftPos + ball_centerPos);
-      console.log('P2 left center:', p2_leftPos + p2_centerPos);
-
       // Ball touches the top of the player 1, bounces straight up:
       if (Math.floor(ball_leftPos + ball_centerPos) === Math.floor(p2_leftPos + p2_centerPos)) {
         this.ball.velocityX = 0;
       }
       // Ball touches the front of P2 -> Ball's direction is negative (left)
-      else if (ball_leftPos + ball_centerPos > p2_leftPos && ball_leftPos + ball_centerPos < p2_leftPos + p2_centerPos) {
+      else if (ball_rightPos >= p2_leftPos && ball_rightPos <= p2_leftPos + p2_centerPos) {
         // alert('<-');
         if (this.ball.velocityX === 0) this.ball.velocityX = -this.gameBallVelocity;
         this.ball.velocityX = -Math.abs(this.ball.velocityX);
       }
       // Ball touches the back of P2 -> Ball's direction is positive (right)
-      else if (ball_leftPos + ball_centerPos > p2_leftPos + p2_centerPos && ball_leftPos + ball_centerPos < p2_rightPos) {
+      else if (ball_leftPos > p2_leftPos + p2_centerPos && ball_leftPos < p2_rightPos) {
         // alert('->');
         if (this.ball.velocityX === 0) this.ball.velocityX = this.gameBallVelocity;
         this.ball.velocityX = Math.abs(this.ball.velocityX);
