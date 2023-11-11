@@ -1,0 +1,58 @@
+#end-game-screen {
+  display: flex;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+#game-result {
+  font-size: 42px;
+  padding-bottom: 50px;
+  /* padding-top: 200px; */
+}
+
+#final-score > p {
+  padding: 5px;
+  font-size: 18px;
+}
+
+#final-score {
+  padding-bottom: 50px;
+}
+
+#restart-button {
+  color: white;
+  background-color: #8b0000;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: 'DotGothic16', cursive;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+#restart-button:hover {
+  cursor: pointer;
+  background-color: #bf1f1f;
+}
+
+#restart-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    #1a1a1a 25%,
+    transparent 25%,
+    transparent 75%,
+    #1a1a1a 75%,
+    #1a1a1a
+  );
+  background-size: 8px 8px;
+  z-index: -1;
+}
