@@ -21,9 +21,38 @@
 }
 
 #restart-button {
-  padding: 15px 25px;
-  border-radius: 8px;
   color: white;
-  background-color: #e51f1f;
-  text-transform: uppercase;
+  background-color: #8b0000;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: 'DotGothic16', cursive;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+#restart-button:hover {
+  cursor: pointer;
+  background-color: #bf1f1f;
+}
+
+#restart-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    #1a1a1a 25%,
+    transparent 25%,
+    transparent 75%,
+    #1a1a1a 75%,
+    #1a1a1a
+  );
+  background-size: 8px 8px;
+  z-index: -1;
 }
