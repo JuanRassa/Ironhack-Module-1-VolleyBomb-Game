@@ -43,6 +43,7 @@ class Ball {
 
     // Y-axis movement direction control
     if (this.top + this.height >= this.gameCanvasHeight) {
+      console.log('BALL GROUND:', this.element_DOM.getBoundingClientRect());
       this.velocityY = -this.velocityY; // Change the y direction
       this.top = this.gameCanvasHeight - this.height; // Repositioning inside the canvas
     }
