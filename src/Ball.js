@@ -13,7 +13,8 @@ class Ball {
 
     this.element_DOM = document.createElement('div');
     this.explosion_element_DOM = undefined;
-
+    this.wallAudio = new Audio('/assets/audio/wall-sound-short.wav');
+    this.wallAudio.volume = 0.6;
     this.addBall();
   }
 
@@ -29,22 +30,24 @@ class Ball {
   }
 
   moveBall() {
-    // console.log(this.left);
     // X-Axis movement direction control:
     this.velocityY += this.gravity;
     if (this.left + this.width >= this.gameCanvasWidth) {
       this.velocityX = -this.velocityX; // Change the x direction
       this.left = this.gameCanvasWidth - this.width; // Repositioning inside the canvas
+      this.wallAudio.play();
     }
     if (this.left <= 0) {
       this.velocityX = -this.velocityX; // Change the x direction
       this.left = 0; // Repositioning inside the canvas
+      this.wallAudio.play();
     }
 
     // Y-axis movement direction control
     if (this.top + this.height >= this.gameCanvasHeight) {
       this.velocityY = -this.velocityY; // Change the y direction
       this.top = this.gameCanvasHeight - this.height; // Repositioning inside the canvas
+      this.wallAudio.play();
     }
     if (this.top <= 0) {
       this.velocityY = -this.velocityY; // Change the y direction

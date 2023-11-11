@@ -46,6 +46,8 @@ class Game {
     this.playerTwoFinalScore = document.getElementById('player-two-finalscore');
 
     this.explosionSound = new Audio('/assets/audio/bomb-explosion.wav');
+    this.playerAudio = new Audio('/assets/audio/player-sound.wav');
+    this.playerAudio.playbackRate = 1;
   }
 
   // METHODS
@@ -61,8 +63,6 @@ class Game {
       this.startRoundTimer();
       this.loop();
     }, 1000);
-    console.log('Game Canvas Width: ', this.canvasWidth);
-    console.log('Game Canvas X Position (left): ', this.gameCanvas.getBoundingClientRect());
   }
 
   startRoundTimer() {
@@ -214,6 +214,7 @@ class Game {
     // if (p1 && p2 && ball) {
     // Detect collision with P1
     if (ball_rightPos > p1_leftPos && ball_leftPos < p1_rightPos && ball_topPos < p1_bottomPos && ball_bottomPos > p1_topPos) {
+      this.playerAudio.play();
       // Ball touches the top of the player 1, bounces straight up:
       if (Math.floor(ball_leftPos + ball_centerPos) === Math.floor(p1_leftPos + p1_centerPos)) {
         this.ball.velocityX = 0;
@@ -236,6 +237,7 @@ class Game {
 
     // Detect collision with P2
     if (ball_rightPos > p2_leftPos && ball_leftPos < p2_rightPos && ball_topPos < p2_bottomPos && ball_bottomPos > p2_topPos) {
+      this.playerAudio.play();
       // Ball touches the top of the player 1, bounces straight up:
       if (Math.floor(ball_leftPos + ball_centerPos) === Math.floor(p2_leftPos + p2_centerPos)) {
         this.ball.velocityX = 0;
