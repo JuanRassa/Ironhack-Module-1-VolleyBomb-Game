@@ -14,17 +14,24 @@ window.onload = function () {
       isPlaying = true;
       song.play();
       soundToggle.classList.add('sound-on');
-      soundToggle.classList.off('sound-off');
+      soundToggle.classList.remove('sound-off');
+    } else {
+      isPlaying = false;
+      song.pause();
+      soundToggle.classList.add('sound-off');
+      soundToggle.classList.remove('sound-on');
     }
-    !isPlaying ? song.play() : song.pause();
-    !isPlaying ? (isPlaying = true) : (isPlaying = false);
   });
 
   startButton.addEventListener('click', () => {
     game.start();
-    window.addEventListener('keydown', e => game.playerOne.movementController(e));
+    window.addEventListener('keydown', e =>
+      game.playerOne.movementController(e)
+    );
     window.addEventListener('keyup', e => game.playerOne.movementController(e));
-    window.addEventListener('keydown', e => game.playerTwo.movementController(e));
+    window.addEventListener('keydown', e =>
+      game.playerTwo.movementController(e)
+    );
     window.addEventListener('keyup', e => game.playerTwo.movementController(e));
   });
 
