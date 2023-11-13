@@ -48,3 +48,9 @@ header#score-section {
 #sound-toggle-header.sound-on {
   background-image: url(/assets/volume-button.png);
 }
+
+@media screen and (width < 1024px) {
+  #score-section {
+    display: none;
+  }
+}

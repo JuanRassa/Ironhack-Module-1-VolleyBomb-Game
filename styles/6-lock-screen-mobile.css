@@ -1,0 +1,29 @@
+#lock-mobile-screen {
+  display: none;
+}
+
+@media screen and (width < 1024px) {
+  #lock-mobile-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    padding: 0 12px;
+    margin-top: 44px;
+  }
+
+  #lock-mobile-screen > h2 {
+    font-size: 32px;
+  }
+
+  #lock-mobile-screen > p {
+    font-size: 18px;
+    text-align: center;
+    margin: 16px 0;
+  }
+
+  #lock-mobile-screen > img {
+    scale: 0.7;
+  }
+}
