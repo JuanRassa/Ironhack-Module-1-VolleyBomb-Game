@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="styles/3-welcome-screen.css" />
     <link rel="stylesheet" href="styles/4-game-screen.css" />
     <link rel="stylesheet" href="styles/5-end-game-screen.css" />
+    <link rel="stylesheet" href="/styles/6-lock-screen-mobile.css" />
 
     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
 
@@ -36,7 +37,6 @@
       id="welcome-screen"
       class="center-main-sections flex-main-sections"
     >
-      <!-- <img src="/assets/gamelogo.png" class="game-logo" /> -->
       <img src="/assets/logo.png" class="game-logo" />
       <div class="game-rules">
         <ul>
@@ -80,7 +80,19 @@
       <button id="restart-button">Play Again</button>
     </section>
 
-    <!-- <script src="/src/canvasTest.js"></script> -->
+    <section
+      id="lock-mobile-screen"
+      class="center-main-sections flex-main-sections"
+      style="width: 85vw"
+    >
+      <img src="/assets/logo.png" class="game-logo" />
+      <h2>What a pitty! :(</h2>
+      <p>
+        This game is intendeed to be played in a desktop or laptop screen with a
+        keybord. Please, open it on your computer and have fun
+      </p>
+    </section>
+
     <script src="/src/Round.js"></script>
     <script src="/src/Net.js"></script>
     <script src="/src/Ball.js"></script>
