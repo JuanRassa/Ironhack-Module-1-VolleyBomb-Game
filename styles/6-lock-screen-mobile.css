@@ -10,6 +10,7 @@
     align-items: center;
     min-height: 40vh;
     padding: 0 12px;
+    margin-top: 44px;
   }
 
   #lock-mobile-screen > h2 {
